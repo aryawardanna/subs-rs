@@ -12,9 +12,9 @@
     >
     <div class="container-fluid">
         <div class="dashboard-heading">
-            <h2 class="dashboard-title">Product</h2>
+            <h2 class="dashboard-title">trash</h2>
             <p class="dashboard-subtitle">
-                List of Product
+                List of trash
             </p>
         </div>
         <div class="dashboard-content">
@@ -22,8 +22,9 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
-                            <a href="{{  route('product.create') }}" class="btn btn-primary mb-3">
-                                + Tambah Product Baru
+
+                            <a href="{{  route('trash-create') }}" class="btn btn-primary mb-3">
+                                + Tambah Trash Baru
                             </a>
                             <div class="table-responsive">
                                 <table class="table table-hover scroll-horizontal-vertical w-100" id="crudTable">
@@ -32,7 +33,6 @@
                                         <th>ID</th>
                                         <th>Nama</th>
                                         <th>Pemilik</th>
-                                        <th>Kategori</th>
                                         <th>Harga</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -64,7 +64,6 @@
                 { data: 'id', name: 'id' },
                 { data: 'name', name: 'name' },
                 { data: 'user.name', name: 'user.name' },
-                { data: 'category.name', name: 'category.name' },
                 { data: 'price', name: 'price' },
                 {
                     data: 'action',

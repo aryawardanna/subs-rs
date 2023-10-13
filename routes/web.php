@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\AdmTrashController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\TrashController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +21,6 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/register/success', 'Auth\RegisterController@success')->name('register-success');
 
 Route::group(['middleware' => ['auth']], function () {
-
-
-
     Route::get('/dashboard', 'DashboardController@index')
         ->name('dashboard');
 
@@ -52,7 +51,13 @@ Route::prefix('admin')
     ->group(function() {
         Route::get('/', 'AdmDashboardController@index')->name('admin-dashboard');
         Route::resource('user', 'UserController');
-        Route::resource('product', 'ProductController');
+        // Route::resource('trash', TrashController::class);
+        Route::get('/trash', [AdmTrashController::class, 'index'])->name('trash-index');
+        Route::get('/trash/create', [AdmTrashController::class, 'create'])->name('trash-create');
+        Route::post('/trash', [AdmTrashController::class, 'store'])->name('trash-store');
+        Route::delete('/trash/{id}', [AdmTrashController::class, 'destroy'])->name('trash-destroy');
+
+
         Route::resource('product-gallery', 'ProductGalleryController');
     });
 

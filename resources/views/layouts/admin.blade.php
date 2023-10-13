@@ -34,8 +34,8 @@
               Dashboard
             </a>
             <a
-              href="#"
-              class="list-group-item list-group-item-action {{ (request()->is('admin/product')) ? 'active' : '' }} "
+              href="{{ route('trash-index') }}"
+              class="list-group-item list-group-item-action {{ (request()->is('admin/trash')) ? 'active' : '' }} "
             >
               Sampah
             </a>

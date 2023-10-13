@@ -25,7 +25,6 @@ class TrashRequest extends FormRequest
     {
         return [
             'name' => 'required|max:255',
-            'users_id' => 'required|exists:users,id',
             'price' => 'required|integer',
             'description' => 'required',
         ];

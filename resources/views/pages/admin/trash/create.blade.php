@@ -12,9 +12,9 @@
 >
   <div class="container-fluid">
     <div class="dashboard-heading">
-        <h2 class="dashboard-title">Product</h2>
+        <h2 class="dashboard-title">Trash</h2>
         <p class="dashboard-subtitle">
-            Create New Product
+            Create New Trash
         </p>
     </div>
     <div class="dashboard-content">
@@ -29,27 +29,28 @@
                   </ul>
               </div>
           @endif
-          <form action="{{ route('product.store') }}" method="post" enctype="multipart/form-data">
+
+          <form action="{{ route('trash-store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="card">
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
-                      <label>Nama Product</label>
+                      <label>Nama Trash</label>
                       <input type="text" class="form-control" name="name" required />
                     </div>
                   </div>
-                  <div class="col-md-12">
+                  {{-- <div class="col-md-12">
                     <div class="form-group">
-                      <label>Pemilik Product</label>
+                      <label>Pemilik Sampah</label>
                       <select name="users_id" class="form-control">
                         @foreach ($users as $user)
                           <option value="{{ $user->id }}">{{ $user->name }}</option>
                         @endforeach
                       </select>
                     </div>
-                  </div>
+                  </div> --}}
                   {{-- <div class="col-md-12">
                     <div class="form-group">
                       <label>Kategori Product</label>
