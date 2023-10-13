@@ -3,21 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use App\Product;
 use App\Category;
 use App\ProductGallery;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\ProductRequest;
+use App\Trash;
 
-class DashboardProductController extends Controller
+class DashboardTrashController extends Controller
 {
     public function index()
     {
-        $products = Product::with(['galleries','category'])->get();
+        $trash = Trash::select('*')->get();
 
-        return view('pages.dashboard-products',[
-            'products' => $products
+        return view('pages.dashboard-trash',[
+            'trash' => $trash
         ]);
     }
 
@@ -29,7 +29,7 @@ class DashboardProductController extends Controller
 
         ProductGallery::create($data);
 
-        return redirect()->route('dashboard-product-details', $request->products_id);
+        return redirect()->route('dashboard-trash-details', $request->trash_id);
     }
 
     public function deleteGallery(Request $request, $id)
@@ -37,44 +37,44 @@ class DashboardProductController extends Controller
         $item = ProductGallery::findorFail($id);
         $item->delete();
 
-        return redirect()->route('dashboard-product-details', $item->products_id);
+        return redirect()->route('dashboard-trash-details', $item->trash_id);
     }
 
     public function create()
     {
         $users = User::all();
 
-        return view('pages.dashboard-products-create',[
+        return view('pages.dashboard-trash-create',[
             'users' => $users,
         ]);
     }
 
-    public function store(ProductRequest $request)
+    public function store(TrashRequest $request)
     {
         $data = $request->all();
 
         $data['slug'] = Str::slug($request->name);
-        $product = Product::create($data);
+        $product = Trash::create($data);
 
         $gallery = [
-            'products_id' => $product->id,
-            'photos' => $request->file('photo')->store('assets/product', 'public')
+            'trash_id' => $product->id,
+            'photos' => $request->file('photo')->store('assets/trash', 'public')
         ];
         ProductGallery::create($gallery);
 
-        return redirect()->route('dashboard-product');
+        return redirect()->route('dashboard-trash');
     }
 
-    public function update(ProductRequest $request, $id)
+    public function update(TrashRequest $request, $id)
     {
         $data = $request->all();
 
-        $item = Product::findOrFail($id);
+        $item = Trash::findOrFail($id);
 
         $data['slug'] = Str::slug($request->name);
 
         $item->update($data);
 
-        return redirect()->route('dashboard-product');
+        return redirect()->route('dashboard-trash');
     }
 }

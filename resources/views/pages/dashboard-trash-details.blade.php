@@ -29,7 +29,7 @@
                   </ul>
               </div>
           @endif
-          <form action="{{ route('dashboard-product-update', $product->id) }}" method="POST" enctype="multipart/form-data">
+          <form action="{{ route('dashboard-trash-update', $trash->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="users_id" value="{{ Auth::user()->id }}">
             <div class="card">
@@ -37,7 +37,7 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label>Product Name</label>
+                      <label>Name Sampah</label>
                       <input
                         type="text"
                         name="name"
@@ -57,17 +57,6 @@
                       />
                     </div>
                   </div>
-                  {{-- <div class="col-md-12">
-                    <div class="form-group">
-                      <label>Kategori</label>
-                      <select name="categories_id" class="form-control">
-                        <option value="{{ $product->categories_id }}">Tidak diganti ({{ $product->category->name }})</option>
-                        @foreach ($categories as $categories)
-                          <option value="{{ $categories->id }}">{{ $categories->name }}</option>
-                        @endforeach
-                      </select>
-                    </div>
-                  </div> --}}
                   <div class="col-md-12">
                     <div class="form-group">
                       <label>Description</label>

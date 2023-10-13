@@ -33,8 +33,8 @@
               Dashboard
             </a>
             <a
-              href="#"
-              class="list-group-item list-group-item-action {{ (request()->is('dashboard/products*')) ? 'active' : '' }} "
+              href="{{ route('dashboard-trash') }}"
+              class="list-group-item list-group-item-action {{ (request()->is('dashboard/trash*')) ? 'active' : '' }} "
             >
               My Sampah
             </a>

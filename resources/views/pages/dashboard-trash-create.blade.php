@@ -29,7 +29,7 @@
                   </ul>
               </div>
           @endif
-          <form action="{{ route('dashboard-product-store') }}" method="POST" enctype="multipart/form-data">
+          <form action="{{ route('dashboard-trash-store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="users_id" value="{{ Auth::user()->id }}">
             <div class="card">
@@ -37,7 +37,7 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label>Product Name</label>
+                      <label>Nama Sampah</label>
                       <input type="text" class="form-control" name="name"/>
                     </div>
                   </div>

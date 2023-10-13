@@ -25,21 +25,21 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/dashboard', 'DashboardController@index')
         ->name('dashboard');
 
-    Route::get('/dashboard/products', 'DashboardProductController@index')
-        ->name('dashboard-product');
-    Route::get('/dashboard/products/create', 'DashboardProductController@create')
-        ->name('dashboard-product-create');
-    Route::post('/dashboard/products', 'DashboardProductController@store')
-        ->name('dashboard-product-store');
-    Route::get('/dashboard/products/{id}', 'DashboardProductController@details')
-        ->name('dashboard-product-details');
-    Route::post('/dashboard/products/{id}', 'DashboardProductController@update')
-        ->name('dashboard-product-update');
+    Route::get('/dashboard/trash', 'DashboardTrashController@index')
+        ->name('dashboard-trash');
+    Route::get('/dashboard/trash/create', 'DashboardTrashController@create')
+        ->name('dashboard-trash-create');
+    Route::post('/dashboard/trash', 'DashboardTrashController@store')
+        ->name('dashboard-trash-store');
+    Route::get('/dashboard/trash/{id}', 'DashboardTrashController@details')
+        ->name('dashboard-trash-details');
+    Route::post('/dashboard/trash/{id}', 'DashboardTrashController@update')
+        ->name('dashboard-trash-update');
 
-    Route::post('/dashboard/products/gallery/upload', 'DashboardProductController@uploadGallery')
-        ->name('dashboard-product-gallery-upload');
-    Route::get('/dashboard/products/gallery/delete/{id}', 'DashboardProductController@deleteGallery')
-        ->name('dashboard-product-gallery-delete');
+    Route::post('/dashboard/trash/gallery/upload', 'DashboardTrashController@uploadGallery')
+        ->name('dashboard-trash-gallery-upload');
+    Route::get('/dashboard/trash/gallery/delete/{id}', 'DashboardTrashController@deleteGallery')
+        ->name('dashboard-trash-gallery-delete');
 
 
     Route::post('/dashboard/update/{redirect}', 'DashboardSettingController@update')
