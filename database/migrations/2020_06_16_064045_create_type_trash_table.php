@@ -16,7 +16,8 @@ class CreateTypeTrashTable extends Migration
         Schema::create('type_trash', function (Blueprint $table) {
             $table->id();
             $table->string('photos');
-            $table->foreignId('trash_id')->constrained('trash');
+            $table->string('name');
+            $table->string('text');
             $table->timestamps();
         });
     }
