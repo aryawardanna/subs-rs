@@ -12,9 +12,9 @@
     >
     <div class="container-fluid">
         <div class="dashboard-heading">
-            <h2 class="dashboard-title">Product Gallery</h2>
+            <h2 class="dashboard-title">Tipe Sampah</h2>
             <p class="dashboard-subtitle">
-                List of Gallery
+                List of Trased Type
             </p>
         </div>
         <div class="dashboard-content">
@@ -22,15 +22,15 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
-                            <a href="{{  route('product-gallery.create') }}" class="btn btn-primary mb-3">
-                                + Tambah Galeri Baru
+                            <a href="{{  route('trash-type-create') }}" class="btn btn-primary mb-3">
+                                + Tambah Tipe
                             </a>
                             <div class="table-responsive">
                                 <table class="table table-hover scroll-horizontal-vertical w-100" id="crudTable">
                                     <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Produk</th>
+                                        <th>Nama Tipe</th>
                                         <th>Foto</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -60,7 +60,7 @@
             },
             columns: [
                 { data: 'id', name: 'id' },
-                { data: 'product.name', name: 'product.name' },
+                { data: 'name', name: 'name' },
                 { data: 'photos', name: 'photos' },
                 {
                     data: 'action',

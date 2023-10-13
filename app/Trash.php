@@ -14,15 +14,15 @@ class Trash extends Model
     protected $table = 'trash';
 
     protected $fillable = [
-        'name', 'users_id', 'price', 'description', 'slug'
+        'name', 'users_id', 'price', 'description', 'slug', 'type_trash_id'
     ];
 
     protected $hidden = [
 
     ];
 
-    public function galleries(){
-        return $this->hasMany( ProductGallery::class, 'products_id', 'id' );
+    public function typeTrash(){
+        return $this->belongsTo(TypeTrash::class);
     }
 
     public function user(){

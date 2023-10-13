@@ -12,9 +12,9 @@
 >
   <div class="container-fluid">
     <div class="dashboard-heading">
-        <h2 class="dashboard-title">Product Gallery</h2>
+        <h2 class="dashboard-title">Type Trash</h2>
         <p class="dashboard-subtitle">
-            Create New Product Gallery
+            Create New Type
         </p>
     </div>
     <div class="dashboard-content">
@@ -29,27 +29,35 @@
                   </ul>
               </div>
           @endif
-          <form action="{{ route('product-gallery.store') }}" method="post" enctype="multipart/form-data">
+          <form action="{{ route('type-trash-store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="card">
               <div class="card-body">
                 <div class="row">
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label>Product</label>
-                      <select name="products_id" class="form-control">
-                        @foreach ($products as $product)
-                          <option value="{{ $product->id }}">{{ $product->name }}</option>
-                        @endforeach
-                      </select>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Nama Tipe</label>
+                            <input type="text" class="form-control" name="name" required />
+                        </div>
                     </div>
-                  </div>
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label>Foto</label>
-                      <input type="file" class="form-control" name="photos" placeholder="Photo" required />
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Harga</label>
+                            <input type="number" class="form-control" name="price" required />
+                        </div>
                     </div>
-                  </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Description</label>
+                            <input type="text" class="form-control" name="text" required />
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                        <label>Foto</label>
+                        <input type="file" class="form-control" name="photos" placeholder="Photo" required />
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                   <div class="col text-right">

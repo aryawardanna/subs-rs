@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ChangeNullableFieldAtUsersTable extends Migration
+class AddPriceToTypeTrashTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class ChangeNullableFieldAtUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('phone_number')->nullable()->change();
+        Schema::table('type_trash', function (Blueprint $table) {
+            $table->float('price',8,2);
         });
     }
 
@@ -25,8 +25,8 @@ class ChangeNullableFieldAtUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('phone_number')->nullable(false)->change();
+        Schema::table('type_trash', function (Blueprint $table) {
+            $table->dropColumn('price');
         });
     }
 }

@@ -40,8 +40,8 @@
               Sampah
             </a>
             <a
-              href="#"
-              class="list-group-item list-group-item-action {{ (request()->is('admin/product-gallery*')) ? 'active' : '' }} "
+              href="{{ route('type-trash-index') }}"
+              class="list-group-item list-group-item-action {{ (request()->is('admin/type-trash*')) ? 'active' : '' }} "
             >
               Type Sampah
             </a>

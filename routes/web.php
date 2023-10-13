@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdmTrashController;
+use App\Http\Controllers\Admin\AdmTypeTrashController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\TrashController;
 
@@ -57,8 +58,10 @@ Route::prefix('admin')
         Route::post('/trash', [AdmTrashController::class, 'store'])->name('trash-store');
         Route::delete('/trash/{id}', [AdmTrashController::class, 'destroy'])->name('trash-destroy');
 
-
-        Route::resource('product-gallery', 'ProductGalleryController');
+        Route::get('/type-trash', [AdmTypeTrashController::class, 'index'])->name('type-trash-index');
+        Route::get('/type-trash/create', [AdmTypeTrashController::class, 'create'])->name('trash-type-create');
+        Route::post('/type-trash', [AdmTypeTrashController::class, 'store'])->name('type-trash-store');
+        // Route::resource('product-gallery', 'ProductGalleryController');
     });
 
 Auth::routes();

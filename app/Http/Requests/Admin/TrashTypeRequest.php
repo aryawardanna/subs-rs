@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProductGalleryRequest extends FormRequest
+class TrashTypeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,8 @@ class ProductGalleryRequest extends FormRequest
     public function rules()
     {
         return [
-            'products_id' => 'required|exists:products,id',
-            'photos' => 'required|image',
+            'name' => 'required|unique:type_trash,name,except,id',
+            'photos' => 'required|image|max:2048',
         ];
     }
 }

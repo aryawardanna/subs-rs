@@ -41,26 +41,18 @@
                       <input type="text" class="form-control" name="name" required />
                     </div>
                   </div>
-                  {{-- <div class="col-md-12">
+                  <div class="col-md-12">
                     <div class="form-group">
-                      <label>Pemilik Sampah</label>
-                      <select name="users_id" class="form-control">
-                        @foreach ($users as $user)
-                          <option value="{{ $user->id }}">{{ $user->name }}</option>
+                      <label>Pilih Tipe Sampah</label>
+                      <select name="type_trash_id" class="form-control" required>
+                        <option value="">Pilih Tipe</option>
+                        @foreach ($type as $types)
+                          <option value="{{ $types->id }}">{{ $types->name }}</option>
                         @endforeach
                       </select>
                     </div>
-                  </div> --}}
-                  {{-- <div class="col-md-12">
-                    <div class="form-group">
-                      <label>Kategori Product</label>
-                      <select name="categories_id" class="form-control">
-                        @foreach ($categories as $categories)
-                          <option value="{{ $categories->id }}">{{ $categories->name }}</option>
-                        @endforeach
-                      </select>
-                    </div>
-                  </div> --}}
+                  </div>
+
                   <div class="col-md-12">
                     <div class="form-group">
                       <label>Harga</label>

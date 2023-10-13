@@ -3,21 +3,18 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\TrashRequest;
-use App\Trash;
+use App\Http\Requests\Admin\TrashTypeRequest;
 use App\TypeTrash;
-use App\User;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
 
-class AdmTrashController extends Controller
+class AdmTypeTrashController extends Controller
 {
     public function index()
     {
         if (request()->ajax()) {
-            $query = Trash::with('user');
+            $query = TypeTrash::get();
 
             return DataTables::of($query)
                 ->addColumn('action', function ($item) {
@@ -32,10 +29,7 @@ class AdmTrashController extends Controller
                                         Aksi
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="action' .  $item->id . '">
-                                    <a class="dropdown-item" href="">
-                                        Sunting
-                                    </a>
-                                    <form action="' . route('trash-destroy', $item->id) . '" method="POST">
+                                    <form action="" method="POST">
                                         ' . method_field('delete') . csrf_field() . '
                                         <button type="submit" class="dropdown-item text-danger">
                                             Hapus
@@ -44,50 +38,31 @@ class AdmTrashController extends Controller
                                 </div>
                             </div>
                     </div>';
+                    // ' . route('product-gallery.destroy', $item->id) . '
                 })
-                ->rawColumns(['action'])
+                ->editColumn('photos', function ($item) {
+                    return $item->photos ? '<img src="' . Storage::url($item->photos) . '" style="max-height: 80px;"/>' : '';
+                })
+                ->rawColumns(['action','photos'])
                 ->make();
-                // ' . route('product.edit', $item->id) . '
-                // ' . route('trash.destroy', $item->id) . '
         }
 
-        return view('pages.admin.trash.index');
+        return view('pages.admin.type-trash.index');
     }
 
-     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        $users = User::get();
-        $type = TypeTrash::get();
-
-        return view('pages.admin.trash.create',[
-            'users' => $users,
-            'type' => $type,
-        ]);
+        return view('pages.admin.type-trash.create');
     }
 
-    public function store(TrashRequest $request)
+    public function store(TrashTypeRequest $request)
     {
-        $data = $request->except(['users_id']);
+        $data = $request->all();
 
-        $data['slug'] = Str::slug($request->name);
-        $data['users_id'] = Auth::id();
+        $data['photos'] = $request->file('photos')->store('assets/type-trash', 'public');
 
-        Trash::create($data);
+        TypeTrash::create($data);
 
-        return redirect()->route('trash-index');
-    }
-
-    public function destroy($id)
-    {
-        $item = Trash::findorFail($id);
-        $item->delete();
-
-        return redirect()->route('trash-index');
-
+        return redirect()->route('type-trash-index');
     }
 }
