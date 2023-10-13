@@ -29,7 +29,7 @@
                   </ul>
               </div>
           @endif
-          <form action="{{ route('dashboard-trash-update', $trash->id) }}" method="POST" enctype="multipart/form-data">
+          <form action="{{ route('dashboard-trash-update', $typeTrash->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="users_id" value="{{ Auth::user()->id }}">
             <div class="card">
@@ -37,30 +37,31 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label>Name Sampah</label>
-                      <input
-                        type="text"
-                        name="name"
-                        class="form-control"
-                        value="{{ $product->name }}"
-                      />
+                      <label>Pilih Tipe Sampah</label>
+                      <select name="type_trash_id" class="form-control" required>
+                        <option value="">Pilih Tipe</option>
+                        @foreach ($types as $type)
+                          <option value=" {{ $type->id }} " @if($type->id == $typeTrash->id) selected @endif data-price="{{ $type->price }}">{{ $type->name }}</option>
+                        @endforeach
+                      </select>
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
                       <label>Price</label>
-                      <input
-                        type="number"
-                        name="price"
-                        class="form-control"
-                        value="{{ $product->price }}"
-                      />
+                      <input type="number" class="form-control" name="price" value="{{ $typeTrash->price }}" readonly/>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>Qty (Kg)</label>
+                      <input type="number" class="form-control" name="qty" value="{{ $typeTrash->qty }}" />
                     </div>
                   </div>
                   <div class="col-md-12">
                     <div class="form-group">
                       <label>Description</label>
-                      <textarea name="description" id="editor">{!! $product->description !!}</textarea>
+                      <textarea name="text" id="editor">{!! $typeTrash->text !!}</textarea>
                     </div>
                   </div>
                 </div>
@@ -79,51 +80,7 @@
           </form>
         </div>
       </div>
-      <div class="row mt-2">
-        <div class="col-12">
-          <div class="card">
-            <div class="card-body">
-              <div class="row">
-                @foreach ($product->galleries as $gallery)
-                  <div class="col-md-4">
-                    <div class="gallery-container">
-                      <img
-                        src="{{ Storage::url($gallery->photos ?? '') }}"
-                        alt=""
-                        class="w-100"
-                      />
-                      <a href="{{ route('dashboard-product-gallery-delete', $gallery->id) }}" class="delete-gallery">
-                        <img src="/images/icon-delete.svg" alt="" />
-                      </a>
-                    </div>
-                  </div>
-                @endforeach
-                <div class="col-12">
-                  <form action="{{ route('dashboard-product-gallery-upload') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <input type="hidden" value="{{ $product->id }}" name="products_id">
-                    <input
-                      type="file"
-                      name="photos"
-                      id="file"
-                      style="display: none;"
-                      multiple
-                      onchange="form.submit()"
-                    />
-                    <button
-                      type="button"
-                      class="btn btn-secondary btn-block mt-3"
-                      onclick="thisFileUpload()"
-                    >
-                      Add Photo
-                    </button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
     </div>
   </div>
 </div>
@@ -131,12 +88,25 @@
 
 @push('addon-script')
   <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
-  <script>
-    function thisFileUpload() {
-      document.getElementById("file").click();
-    }
-  </script>
+
   <script>
     CKEDITOR.replace("editor");
   </script>
+  <script>
+        $(document).ready(function() {
+            $("select[name='type_trash_id']").change(function() {
+                $selectedPrice = $(this).find(':selected').data('price');
+                $("input[name='price']").val($selectedPrice);
+            });
+
+            $('form').submit(function(event) {
+                var qty = parseFloat($("input[name='qty']").val());
+
+                if (qty < 0) {
+                    event.preventDefault(); // Menghentikan pengiriman formulir jika qty negatif.
+                    alert('Qty tidak boleh negatif.');
+                }
+            });
+        });
+    </script>
 @endpush

@@ -18,6 +18,8 @@ class CreateTypeTrashTable extends Migration
             $table->string('photos');
             $table->string('name');
             $table->string('text');
+            $table->integer('qty')->default(0);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

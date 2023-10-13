@@ -24,22 +24,19 @@ Route::get('/register/success', 'Auth\RegisterController@success')->name('regist
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/dashboard', 'DashboardController@index')
         ->name('dashboard');
+    Route::get('/trends', 'DashboardController@trendTrash')
+        ->name('trends');
 
-    Route::get('/dashboard/trash', 'DashboardTrashController@index')
+    Route::get('/dashboard/trash', 'DashboardTypeTrashController@index')
         ->name('dashboard-trash');
-    Route::get('/dashboard/trash/create', 'DashboardTrashController@create')
+    Route::get('/dashboard/trash/create', 'DashboardTypeTrashController@create')
         ->name('dashboard-trash-create');
-    Route::post('/dashboard/trash', 'DashboardTrashController@store')
+    Route::post('/dashboard/trash', 'DashboardTypeTrashController@store')
         ->name('dashboard-trash-store');
-    Route::get('/dashboard/trash/{id}', 'DashboardTrashController@details')
+    Route::get('/dashboard/trash/{id}', 'DashboardTypeTrashController@details')
         ->name('dashboard-trash-details');
-    Route::post('/dashboard/trash/{id}', 'DashboardTrashController@update')
+    Route::post('/dashboard/trash/{id}', 'DashboardTypeTrashController@update')
         ->name('dashboard-trash-update');
-
-    Route::post('/dashboard/trash/gallery/upload', 'DashboardTrashController@uploadGallery')
-        ->name('dashboard-trash-gallery-upload');
-    Route::get('/dashboard/trash/gallery/delete/{id}', 'DashboardTrashController@deleteGallery')
-        ->name('dashboard-trash-gallery-delete');
 
 
     Route::post('/dashboard/update/{redirect}', 'DashboardSettingController@update')

@@ -35,32 +35,35 @@
             <div class="card">
               <div class="card-body">
                 <div class="row">
+
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label>Nama Sampah</label>
-                      <input type="text" class="form-control" name="name"/>
+                      <label>Pilih Tipe Sampah</label>
+                      <select name="type_trash_id" class="form-control" required>
+                        <option value="">Pilih Tipe</option>
+                        @foreach ($typeTrash as $types)
+                          <option value="{{ $types->id }}" data-price="{{ $types->price }}">{{ $types->name }}</option>
+                        @endforeach
+                      </select>
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
                       <label>Price</label>
-                      <input type="number" class="form-control" name="price"/>
+                      <input type="number" class="form-control" name="price" readonly/>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>Qty (Kg)</label>
+                      <input type="number" class="form-control" name="qty"/>
                     </div>
                   </div>
 
                   <div class="col-md-12">
                     <div class="form-group">
                       <label>Description</label>
-                      <textarea name="description" id="editor"></textarea>
-                    </div>
-                  </div>
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label>Thumbnails</label>
-                      <input type="file" name="photo" class="form-control" />
-                      <p class="text-muted">
-                        Kamu dapat memilih lebih dari satu file
-                      </p>
+                      <textarea name="text" id="editor"></textarea>
                     </div>
                   </div>
                 </div>
@@ -84,8 +87,25 @@
 @endsection
 
 @push('addon-script')
-  <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
-  <script>
-    CKEDITOR.replace("editor");
-  </script>
+    <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace("editor");
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("select[name='type_trash_id']").change(function() {
+                $selectedPrice = $(this).find(':selected').data('price');
+                $("input[name='price']").val($selectedPrice);
+            });
+
+            $('form').submit(function(event) {
+                var qty = parseFloat($("input[name='qty']").val());
+
+                if (qty < 0) {
+                    event.preventDefault(); // Menghentikan pengiriman formulir jika qty negatif.
+                    alert('Qty tidak boleh negatif.');
+                }
+            });
+        });
+    </script>
 @endpush

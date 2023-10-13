@@ -12,7 +12,7 @@
           >
             <div class="container-fluid">
               <div class="dashboard-heading">
-                <h2 class="dashboard-title">My Products</h2>
+                <h2 class="dashboard-title">My Trash</h2>
                 <p class="dashboard-subtitle">
                   Manage it well and get money
                 </p>
@@ -23,13 +23,13 @@
                     <a
                       href="{{ route('dashboard-trash-create') }}"
                       class="btn btn-success"
-                      >Add New Product</a
+                      >Add New Trash</a
                     >
                   </div>
                 </div>
                 <div class="row mt-4">
 
-                  @foreach ($trash as $val)
+                  @foreach ($typeTrash as $val)
                       <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                         <a
                           href="{{ route('dashboard-trash-details', $val->id) }}"
@@ -37,11 +37,12 @@
                         >
                           <div class="card-body">
                             <img
-                              src="{{ Storage::url($val->galleries->first()->photos ?? '') }}"
+                              src="{{ Storage::url($val->photos ?? '') }}"
                               alt=""
                               class="w-100 mb-2"
                             />
                             <div class="product-title">{{ $val->name }}</div>
+                            <div class="product-title">Rp. {{ $val->price }} | {{ $val->qty }} Kg</div>
                           </div>
                         </a>
                       </div>

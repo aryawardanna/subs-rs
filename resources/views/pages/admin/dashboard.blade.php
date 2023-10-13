@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+
 <!-- Section Content -->
 <div
     class="section-content section-dashboard-home"
@@ -16,6 +17,11 @@
             <p class="dashboard-subtitle">
                 This is Administrator Panel
             </p>
+        </div>
+
+        <div class="dashboard-content">
+            <div class=""><a href=""></a></div>
+            <div class=""><p></p></div>
         </div>
         <div class="dashboard-content">
             <div class="row">
